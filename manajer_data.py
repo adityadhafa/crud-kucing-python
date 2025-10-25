@@ -1,5 +1,5 @@
 import json
-from program_kucing import daftar_kucingnya_buk_sai
+
 from kucing import Kucing
 from typing import Any
 
@@ -13,7 +13,7 @@ from typing import Any
     )
     return data_kucing_yang_dibuat_jadi_objek'''
 
-def save_data():
+def save_data(daftar_kucingnya_buk_sai: list[Kucing]):
     data_kucing_dict: list[dict[str, Any]] = []
     for each_kucing in daftar_kucingnya_buk_sai:
         data_kucing_dict.append(each_kucing.simpan_data_kucing_to_dict())

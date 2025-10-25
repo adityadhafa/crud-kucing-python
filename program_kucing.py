@@ -141,7 +141,7 @@ while user_choice != 5:
             # append itu fungsi bawaannya list buatt masukin data baruu langsung ke paling belakang tapi, dan ini cara paling aman paling real'''
             
             ask_user_to_add_kucing_baru()
-            save_data()
+            save_data(daftar_kucingnya_buk_sai)
 
         case 1: # UPDATE
             # kalo mau liat data kucingnya siapa aja pake case read aja berarti kalo gitu yaa
@@ -149,7 +149,7 @@ while user_choice != 5:
             kucing_object = cari_kucing_object_version(siapa_yang_mau_diubah)
             if kucing_object != None:
                 kucing_object.ubah_data_salah_satu_kucing()
-                save_data()
+                save_data(daftar_kucingnya_buk_sai)
             else:
                 print("buk sai ga punya mucing itu woyy")
             '''if data_kucing != None:
@@ -234,7 +234,7 @@ while user_choice != 5:
             else:
                 print("tidak ada mucingnya buk Sai yang namanya ituu woy")
                 
-            save_data()
+            save_data(daftar_kucingnya_buk_sai)
 
         case _: # in case none (_)
             print("Pilihan tidak dikenal, coba lagi ya!")
