@@ -206,9 +206,9 @@ while user_choice != 5:
                     print(f"{kucing['nama']} hobinya {kucing['hobi']}, sifatnya {", ".join(kucing['sifat'])}, dan suka nongkrong di {", ".join(kucing['spot nongkrong'])}\n")'''
                 for kucing in daftar_kucingnya_buk_sai:
                     print(f"nama: {kucing.nama}")
-                    print(f"nama: {kucing.hobi}")
-                    print(f"nama: {",".join(kucing.sifat)}")
-                    print(f"nama: {",".join(kucing.spot_nongkrong)}")
+                    print(f"hobi: {kucing.hobi}")
+                    print(f"sifatnya: {",".join(kucing.sifat)}")
+                    print(f"spot nongkrong: {",".join(kucing.spot_nongkrong)}")
                     print("\n")
             elif data_kucing != None: #artinya adalah data kucingnya itu ada untuk ditampilin maka do this # pastikan ajaa dulu data_kucingnya itu ga none untuk masuk ke pengerjaan di bawahnya
                 '''print(f"nama: {data_kucing["nama"]}")
@@ -217,9 +217,9 @@ while user_choice != 5:
                 print(f"suka nongkrong di: {", ".join(data_kucing["spot nongkrong"])}")'''
                 # break itu buat ngebreak loop
                 print(f"nama: {data_kucing.nama}")
-                print(f"nama: {data_kucing.hobi}")
-                print(f"nama: {",".join(data_kucing.sifat)}")
-                print(f"nama: {",".join(data_kucing.spot_nongkrong)}")
+                print(f"hobi: {data_kucing.hobi}")
+                print(f"sifatnya: {",".join(data_kucing.sifat)}")
+                print(f"spot nongkrong: {",".join(data_kucing.spot_nongkrong)}")
             else:
                 print("tidak ada mucingnya buk Sai yang namanya ituu woy")
 
