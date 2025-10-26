@@ -37,7 +37,10 @@ def ambil_data():
                 # ini kan dia di sini berubah jadi object ya satu persatu, teurs.. kita simpen ke list pakee append gitu kah? hmm kucing banget lah
                 list_kucing_buk_sai_in_object.append(satu_per_satu)
             return list_kucing_buk_sai_in_object # atau sebenenrya ya bisa aja langsung return json.load(file) biar lgsg return jsonnya langsung ngeload filenya
-        except:
+        except FileNotFoundError:
+            list_kucing_buk_sai_in_object: list[Kucing] = [] # define dulu list kosongannya di sini
+            return list_kucing_buk_sai_in_object # ga boleh nge defin langsung di return ya
+        except json.JSONDecodeError: 
             list_kucing_buk_sai_in_object: list[Kucing] = [] # define dulu list kosongannya di sini
             return list_kucing_buk_sai_in_object # ga boleh nge defin langsung di return ya
         '''except FileNotFoundError:

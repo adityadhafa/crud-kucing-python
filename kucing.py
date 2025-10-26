@@ -19,9 +19,10 @@ class Kucing: # ini blueprint pembuatan produknya
         print("meong! maong!")
 
     def tampilkan_informasi_kucing(self):
-        # print(f" namanya {self.nama}, hobinya {self.hobi}, sifatnya {", ".join(self.sifat)}, sukanya nongkrong di {", ".join(self.spot_nongkrong)}") # aku juga mau sekaligus dia ini emang beneran melakukan pengeprint-an teks, jadi ga cuma nyimpen doang, jadi dia/fungsi ini bisa nyimpen value dan value yang disimpan itu bisa dipake variabel atau fungsi lain, kemudiaan fungsi ini ketika dipanggil juga akan melakukan sesuatu yaitu print itu tadi yang mana melakukan sesuatu ini yaa ga bisa di pake sama fungsi lain soalnya yaa ini kan yang lakuin tampilkan informasi kucing. hah gimana sih penjelasannya wkkw. ya pookonya gitu lah
+        # UDAH KU JADIIN COMMENT YANG PRINT: print(f" namanya {self.nama}, hobinya {self.hobi}, sifatnya {", ".join(self.sifat)}, sukanya nongkrong di {", ".join(self.spot_nongkrong)}") # aku juga mau sekaligus dia ini emang beneran melakukan pengeprint-an teks, jadi ga cuma nyimpen doang, jadi dia/fungsi ini bisa nyimpen value dan value yang disimpan itu bisa dipake variabel atau fungsi lain, kemudiaan fungsi ini ketika dipanggil juga akan melakukan sesuatu yaitu print itu tadi yang mana melakukan sesuatu ini yaa ga bisa di pake sama fungsi lain soalnya yaa ini kan yang lakuin tampilkan informasi kucing. hah gimana sih penjelasannya wkkw. ya pookonya gitu lah
         return(f" namanya {self.nama}, hobinya {self.hobi}, sifatnya {", ".join(self.sifat)}, sukanya nongkrong di {", ".join(self.spot_nongkrong)}") # karena ini returnn, jadii dia ini bakal menyimpan hal itu juga, return itu bisa jadi bahasa bayinya adalah "kusimpan value x di fungsi ini" (ya gasih)
         # inget yaa, jangann lupaa, karenaa sifat samaa spot nongkrong ini dia sifatnya adalah listt (pabrik init kita nyimpennya sebagai list langsung), makaa kita butuh joinkan dia semua (listnya) menjadiii satu stringg untuk diprintkan jadi satu stringg yang ga pake kotak kotakk begituu, oke?? gaskan
+        # sebaliknya adalah kalo dari string ke list kita harus potong potong (atau kita split split), pake apa? pakee .split()
         #jangan cuma print doang, kembaliin juga namanya
         
     def ubah_data_salah_satu_kucing(self): # jadi tiap satu satu produk kucing dari blueprint ini bisa mengubah datanya lewat/dengna mempunyai fungsi ubah data ini
@@ -37,19 +38,35 @@ class Kucing: # ini blueprint pembuatan produknya
             match nomor_pilihan_user:
                 case 1: # case 1: apa (gitu sintaksnya)
                     self.nama = input("masukkan nama yang baru untuk kucing ini: ") # kalo ini mah ga perlu ngereturn, otomatis udah keubah ini namanya si kucing self
-                    print(f"okay data sudah terubah ya, nih dia {self.tampilkan_informasi_kucing()}")
+                    print("Oke, data sudah terubah!")
+                    print("Data terbaru:")
+                    # Panggil fungsi yang return string, terus di-print
+                    info_terbaru = self.tampilkan_informasi_kucing() 
+                    print(info_terbaru)
                     ngetik_integer = True
                 case 2:
                     self.hobi = input("masukkan hobi yang baru untuk kucing ini: ")
-                    print(f"okay data sudah terubah ya, nih dia {self.tampilkan_informasi_kucing()}")
+                    print("Oke, data sudah terubah!")
+                    print("Data terbaru:")
+                    # Panggil fungsi yang return string, terus di-print
+                    info_terbaru = self.tampilkan_informasi_kucing() 
+                    print(info_terbaru)
                     ngetik_integer = True
                 case 3:
                     self.sifat = input("masukkan sifat-sifat baru untuk kucing ini: ").split(", ") # pake split yaa, soalnya user nginputnya pake koma dann banyak biasanya, jadi ntar banyaknya itu bakal langsung jadi list
-                    print(f"okay data sudah terubah ya, nih dia {self.tampilkan_informasi_kucing()}")
+                    print("Oke, data sudah terubah!")
+                    print("Data terbaru:")
+                    # Panggil fungsi yang return string, terus di-print
+                    info_terbaru = self.tampilkan_informasi_kucing() 
+                    print(info_terbaru)
                     ngetik_integer = True
                 case 4: 
                     self.spot_nongkrong = input("masukkan spot nongkrong yang baru untuk kucing ini: ").split(", ")
-                    print(f"okay data sudah terubah ya, nih dia {self.tampilkan_informasi_kucing()}") # kalo fungsi itu harus ada gininya: fungsi()
+                    print("Oke, data sudah terubah!")
+                    print("Data terbaru:")
+                    # Panggil fungsi yang return string, terus di-print
+                    info_terbaru = self.tampilkan_informasi_kucing() # kalo fungsi itu harus ada gininya: fungsi()
+                    print(info_terbaru) 
                     ngetik_integer = True
                 # ini case kalo unhandled ya
                 case _: # ini itu udah kaya if not integer atau if not one of the case case-nya gitu
