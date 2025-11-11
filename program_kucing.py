@@ -253,6 +253,25 @@ while user_choice != 5:
                 print("tidak ada mucingnya buk Sai yang namanya ituu woy")
                 
             save_data(daftar_kucingnya_buk_sai)
+            
+            print("data berhasil di delete!")
+            
+            tabel_kucing = Table(title="[bold]Daftar Kucing[/bold]")
+
+            # 2. Bikin header kolom-kolomnya
+            tabel_kucing.add_column("Nama Kucing", style="cyan", justify="left")
+            tabel_kucing.add_column("Hobi", style="magenta")
+            tabel_kucing.add_column("Sifat", style="green")
+            tabel_kucing.add_column("Spot Nongkrong", style="green")
+
+            # --- Langkah 3: Isi Datanya ---
+            # (Di project beneran, ini lo lakuin di dalem 'for loop')
+            
+            for each_kucing in daftar_kucingnya_buk_sai:
+                tabel_kucing.add_row(each_kucing.nama, each_kucing.hobi, ", ".join(each_kucing.sifat), ", ".join(each_kucing.spot_nongkrong))
+
+            # --- Langkah Terakhir: Tampilkan Mejanya ---
+            print(tabel_kucing)
 
         case 6:
             print("Mau foto kucing apa?")
