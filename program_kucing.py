@@ -4,6 +4,12 @@
 from kucing import Kucing
 from manajer_data_kucing import save_data, ambil_data
 import api_manager
+from rich import print
+from rich.panel import Panel
+import questionary
+from rich.table import Table
+
+import os ## ini buat ngeclear tiap ngulang programnya
 
 # ini itu bisa banget buat di oop-kan ga sih
 # pgn tak kembangin sampe oop dan pgn tak kembangin sampee aku panggil API anjing dan kucing, untuk kucing kucingya buk Sai, terus nanti aku pgn tampilin fotonya gitu terus aku mau bikin kaya mini game vs vs an yang mana misal yaa kaya kartu lah, kartu anjing ini dengan kartu kucing ini satu tim misal ,dan 2 vs 2, dan masing masing kartu nyimpen biodatanya sendiri dan kaya semacam powernya gitu lah, ya gitu, kalo ga nanti untuk menang atau ga-nya dirandom aja dah 
@@ -43,21 +49,59 @@ def tanya_ke_user():
 # bagian user choice ya
 
 def nyambut_user(): # type hint returnya fungsi -> int
-    print("halo selamat datang di database kucingnya buk Sai!")
-    print("1. mau ubah/update data")
-    print("2. mau nambah data kucing")
-    print("3. mau delete data kucing")
-    print("4. mau tampilin data kucing")
-    print("5. Exit, udah")
-    print("6. mau liat foto kucing kah")
     
-    message_one:  int # ini cara ngedefine variabel langsung dengan tipe datanya, ini ga ngedefine sih, ini cuma ngetype hint doang biar si pylance diem
+    text_nyambut_full = '''
+        1. mau ubah/update data"
+        "2. mau nambah data kucing
+        "3. mau delete data kucing"
+        "4. mau tampilin data kucing"
+        "5. Exit, udah"
+        "6. mau liat foto kucing kah
+    '''
+    
+    ## ternyata cara multi line string itu pake ''' ... ''' toh.. oke
+    
+    # Contoh pake hiasan
+    panel_hias = Panel(
+        text_nyambut_full,# Teks-nya
+        title="[bold]DATABASE KUCING BUK SAI[/bold]",          # Nambahin judul
+        border_style="green"                          # Ganti warna bingkainya
+    )
+    
+    print(panel_hias)
+    
+    status = False
+    while status == False:
+        try:
+            user_choice = questionary.select("mau ngapain?", choices=[
+                                "1. mau ubah/update data", 
+                                "2. mau nambah data kucing",
+                                "3. mau delete data kucing",
+                                "4. mau tampilin data kucing",
+                                "5. Exit, udah",
+                                "6. mau liat foto kucing kah"
+                                ]).ask()
+            ## nanti si questionary ini bakal ngereturn full text soalnya
+            status = True
+            angka = user_choice[0] ## ambil huruf pertamanya aja dari full stringnya, yaitu nanti yang kena bakal angka nomernya doang
+            return int(angka) ## nah terus dari yang awalnya character jadiin integer deh
+        except Exception as e:
+            print(f"{e}")
+    '''
+    # ini cara ngedefine variabel langsung dengan tipe datanya, ini ga ngedefine sih, ini cuma ngetype hint doang biar si pylance diem
     status = False # variabel Boolean tuh manja banget, harus ada value awalnya dulu loh
     # oh iya ya bener juga, kita bisa bikin while true di sini pokonya sampe user itu masukin yang benar, yaitu masukin angka
     while status == False:
         try: # karena bisa jadi user malah input "satu" yang ga bisa diubah sama int.
             #jadi intinya itu ya, try yang bener terus return yang bener
-            message_one = int(input("mau ngapain? (tulis aja nomornya) "))
+            message_one =  questionary.select("mau ngapain?", choices=[
+                                "1. mau ubah/update data", 
+                                "2. mau nambah data kucing",
+                                "3. mau delete data kucing",
+                                "4. mau tampilin data kucing",
+                                "5. Exit, udah",
+                                "6. mau liat foto kucing kah"
+                                ])
             status = True
             return message_one # kalo misalnya di coba dan berhasil yaa langsung return aja
         except ValueError: # dan intinya, except (atau) keculai yang try/yang bener itu maka return atau lakukan ini, gitu, biar ga crash
@@ -67,7 +111,7 @@ def nyambut_user(): # type hint returnya fungsi -> int
     # "memaksa" user ngasih jawaban bener. 
     # ya jangan nge return pesan error dong, masa nanti di variabel yang kesimpen yang pake fungsi ini isinya pesan error
     # makanya kita paksa dan ulang ulang terus aja itu si user buat sampe bener
-
+    '''
 
         
 
@@ -206,36 +250,87 @@ while user_choice != 5:
             # karena nilai status_cari yang di awal udah di set defaultnya, maka kalo ketemu true, kalo ga ya passti defaultnya itu false
             
         case 4: # NAMPILKAN DATA 
+            
+            '''
             print("nama nama kucing yang kita punya saat ini: ") # bener juga ya harusnya ini di sini
             for each_kucing in daftar_kucingnya_buk_sai:
                 print(each_kucing.nama) # gausah pake \n (newline) kalo for loopnya python ngabsenin ya otomatis new line kok
-
-            siapa_yang_ditampilin = input("siapa yang mau ditampilin datanya? atau mau liat full semua? (type: full)")
-            data_kucing = cari_kucing_object_version(siapa_yang_ditampilin)
-
-            if siapa_yang_ditampilin == "full":
-                # nampilin data dengan rapi, maka kudu dipisah?
-                '''for kucing in daftar_kucingnya_buk_sai:
-                    print(f"{kucing['nama']} hobinya {kucing['hobi']}, sifatnya {", ".join(kucing['sifat'])}, dan suka nongkrong di {", ".join(kucing['spot nongkrong'])}\n")'''
-                for kucing in daftar_kucingnya_buk_sai:
-                    print(f"nama: {kucing.nama}")
-                    print(f"hobi: {kucing.hobi}")
-                    print(f"sifatnya: {",".join(kucing.sifat)}")
-                    print(f"spot nongkrong: {",".join(kucing.spot_nongkrong)}")
-                    print("\n")
-            elif data_kucing != None: #artinya adalah data kucingnya itu ada untuk ditampilin maka do this # pastikan ajaa dulu data_kucingnya itu ga none untuk masuk ke pengerjaan di bawahnya
-                '''print(f"nama: {data_kucing["nama"]}")
+            '''
+            
+            #artinya adalah data kucingnya itu ada untuk ditampilin maka do this # pastikan ajaa dulu data_kucingnya itu ga none untuk masuk ke pengerjaan di bawahnya
+            '''print(f"nama: {data_kucing["nama"]}")
                 print(f"hobinya: {data_kucing['hobi']}")
                 print(f"sifatnya: {", ".join(data_kucing["sifat"])}")
                 print(f"suka nongkrong di: {", ".join(data_kucing["spot nongkrong"])}")'''
                 # break itu buat ngebreak loop
-                print(f"nama: {data_kucing.nama}")
-                print(f"hobi: {data_kucing.hobi}")
-                print(f"sifatnya: {",".join(data_kucing.sifat)}")
-                print(f"spot nongkrong: {",".join(data_kucing.spot_nongkrong)}")
-            else:
-                print("tidak ada mucingnya buk Sai yang namanya ituu woy")
+                
+                
+            
+            status = False
+            angka: int
+            while status == False:
+                try:
+                    user_choice = questionary.select("mau nampilkan?", choices=[
+                                        "1. tampilin data salah satu kucing", 
+                                        "2. tampilin semua kucing yang ada",
+                                        ]).ask()
+                    ## nanti si questionary ini bakal ngereturn full text soalnya
+                    angka = int(user_choice[0]) ## ambil huruf pertamanya aja dari full stringnya, yaitu nanti yang kena bakal angka nomernya doang
+                    if type(angka) == int:
+                        status = True
+                    
+                    if angka == 1:
+                        nama_dicari = input("masukkan nama kucing yang mau ditampilkan: ")
+                        siapa_yang_ditampilin = input("siapa yang mau ditampilin datanya? ")
+                        data_kucing = cari_kucing_object_version(siapa_yang_ditampilin)
 
+                        if data_kucing:
+                            
+                            ## pake panel aja biar bagus
+                            
+                            full_text = f'''
+                                nama: {data_kucing.nama}
+                                hobi: {data_kucing.hobi}
+                                sifat: {",".join(data_kucing.sifat)}
+                                spot nongkrong: {",".join(data_kucing.spot_nongkrong)}
+                            '''
+                            
+                            kotak_panel = Panel(
+                                full_text,
+                                title=data_kucing.nama,
+                                border_style= "green"
+                            )
+                            
+                            print(kotak_panel)
+                            
+                        else:
+                            print("tidak ada mucingnya buk Sai yang namanya ituu woy")
+                    else:
+                        # --- Langkah 1 & 2: Bikin Meja & Kolom ---
+
+                        # 1. Bikin objek mejanya
+                        tabel_kucing = Table(title="[bold]Daftar Kucing[/bold]")
+
+                        # 2. Bikin header kolom-kolomnya
+                        tabel_kucing.add_column("Nama Kucing", style="cyan", justify="left")
+                        tabel_kucing.add_column("Hobi", style="magenta", justify="right")
+                        tabel_kucing.add_column("Sifat", style="green")
+
+                        # --- Langkah 3: Isi Datanya ---
+                        # (Di project beneran, ini lo lakuin di dalem 'for loop')
+                        
+                        for each_kucing in daftar_kucingnya_buk_sai:
+                            tabel_kucing.add_row(each_kucing.nama, each_kucing.hobi, ", ".join(each_kucing.sifat))
+
+                        # --- Langkah Terakhir: Tampilkan Mejanya ---
+                        print(tabel_kucing)
+                
+                except Exception as e:
+                    print(f"{e}")
+                
+
+
+            
         case 3: # DELETE
             # bagian delete
             nama_mau_dihapus = input("mau ngehapus datanya siapa? (ketik namanya) ")
