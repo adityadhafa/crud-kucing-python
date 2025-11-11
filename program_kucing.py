@@ -2,7 +2,8 @@
 # import json # mau mindah data ke json supaya jadi data permanen ya import json dulu dong
 
 from kucing import Kucing
-from manajer_data import save_data, ambil_data
+from manajer_data_kucing import save_data, ambil_data
+import api_request
 
 # ini itu bisa banget buat di oop-kan ga sih
 # pgn tak kembangin sampe oop dan pgn tak kembangin sampee aku panggil API anjing dan kucing, untuk kucing kucingya buk Sai, terus nanti aku pgn tampilin fotonya gitu terus aku mau bikin kaya mini game vs vs an yang mana misal yaa kaya kartu lah, kartu anjing ini dengan kartu kucing ini satu tim misal ,dan 2 vs 2, dan masing masing kartu nyimpen biodatanya sendiri dan kaya semacam powernya gitu lah, ya gitu, kalo ga nanti untuk menang atau ga-nya dirandom aja dah 
@@ -48,6 +49,7 @@ def nyambut_user(): # type hint returnya fungsi -> int
     print("3. mau delete data kucing")
     print("4. mau tampilin data kucing")
     print("5. Exit, udah")
+    print("6. mau liat foto kucing kah")
     
     message_one:  int # ini cara ngedefine variabel langsung dengan tipe datanya, ini ga ngedefine sih, ini cuma ngetype hint doang biar si pylance diem
     status = False # variabel Boolean tuh manja banget, harus ada value awalnya dulu loh
@@ -86,7 +88,7 @@ def nyambut_user(): # type hint returnya fungsi -> int
 def cari_kucing_object_version(nama_kucing_dicari: str):
     for each_kucing in daftar_kucingnya_buk_sai:
         if nama_kucing_dicari.strip().lower() == each_kucing.nama.strip().lower():
-            return each_kucing # return 'object' kucing itu
+            return each_kucing # return 'object' kucing itu. var each_kucing kan objek di list daftar_kucingnya_buk_sai
     return None
 
             
@@ -147,11 +149,22 @@ while user_choice != 5:
             # kalo mau liat data kucingnya siapa aja pake case read aja berarti kalo gitu yaa
             siapa_yang_mau_diubah = str(input("datanya siapa yang mau diubah? "))
             kucing_object = cari_kucing_object_version(siapa_yang_mau_diubah)
+            kucing_object = cari_kucing_object_version(siapa_yang_mau_diubah)
             if kucing_object != None:
+                print("Mau ubah apa? 1. Nama, 2. Hobi") # <-- Lo yang nanya
+                pilihan_ubah = input("Pilih: ")
+                if pilihan_ubah == "1":
+                    nama_baru = input("Nama barunya apa? ") # <-- Lo yang nanya
+                    kucing_object.set_nama(nama_baru) # <-- Suruh si object buat diem2 ganti nama
+                else:
+                    hobi_baru = input("Hobi barunya apa? ")
+                    kucing_object.set_hobi(hobi_baru)
+                # ...dan seterusnya...
+            '''if kucing_object != None:
                 kucing_object.ubah_data_salah_satu_kucing()
                 save_data(daftar_kucingnya_buk_sai)
             else:
-                print("buk sai ga punya mucing itu woyy")
+                print("buk sai ga punya mucing itu woyy")'''
             '''if data_kucing != None:
                 ingin_ubah_data_yang = input("mau ubah data kucing yang mana? ketik salah satu dari 1. nama, 2. hobi, 3. sifat, 4. spot nongkrong: ")
                 if ingin_ubah_data_yang == "nama":
@@ -236,6 +249,10 @@ while user_choice != 5:
                 
             save_data(daftar_kucingnya_buk_sai)
 
+        case 6:
+            gambar_random_kucing = learn_api_request.tampilin_gambar_kucing_acak()
+            print(gambar_random_kucing)
+        
         case _: # in case none (_)
             print("Pilihan tidak dikenal, coba lagi ya!")
 

@@ -9,7 +9,7 @@ class Kucing: # ini blueprint pembuatan produknya
         self.nama = nama
         self.hobi = hobi
         self.sifat = sifat # ini nanti langsung jadi list apa gimana sih
-        self.spot_nongkrong = spot_nongkrong
+        self.spot_nongkrong = spot_nongkrong # dia itu akan nerima dalam bentuk apapaun, ya ga sih? ga tau juga ya
         self.energi_awal_kucing = 100
         # self.simpan_data_kucing_to_dict() # kalo kaya gini bisa ga sih? 
         # oh ya ini ga perlu ternyata, mending langsung bikin fungsi/mesin aja buatt ngebuat objek dari Class atau prbrik Kucing ini yang mana nanti sekalian manggil fungsi nama_variabel_objek.simpan_data_kucing_to_dict() kaya yang udah kulakuin di fungsi
@@ -18,20 +18,29 @@ class Kucing: # ini blueprint pembuatan produknya
     def mengeong(self): #self parameter itu maksudnya yaa produknya itu sendiri nanti yang meng-skill ini
         print("meong! maong!")
 
+    def set_nama(self, nama_baru: str):
+        self.nama = nama_baru
+
+    def set_hobi(self, hobi_baru: str):
+        self.hobi = hobi_baru
+
     def tampilkan_informasi_kucing(self):
         # UDAH KU JADIIN COMMENT YANG PRINT: print(f" namanya {self.nama}, hobinya {self.hobi}, sifatnya {", ".join(self.sifat)}, sukanya nongkrong di {", ".join(self.spot_nongkrong)}") # aku juga mau sekaligus dia ini emang beneran melakukan pengeprint-an teks, jadi ga cuma nyimpen doang, jadi dia/fungsi ini bisa nyimpen value dan value yang disimpan itu bisa dipake variabel atau fungsi lain, kemudiaan fungsi ini ketika dipanggil juga akan melakukan sesuatu yaitu print itu tadi yang mana melakukan sesuatu ini yaa ga bisa di pake sama fungsi lain soalnya yaa ini kan yang lakuin tampilkan informasi kucing. hah gimana sih penjelasannya wkkw. ya pookonya gitu lah
         return(f" namanya {self.nama}, hobinya {self.hobi}, sifatnya {", ".join(self.sifat)}, sukanya nongkrong di {", ".join(self.spot_nongkrong)}") # karena ini returnn, jadii dia ini bakal menyimpan hal itu juga, return itu bisa jadi bahasa bayinya adalah "kusimpan value x di fungsi ini" (ya gasih)
         # inget yaa, jangann lupaa, karenaa sifat samaa spot nongkrong ini dia sifatnya adalah listt (pabrik init kita nyimpennya sebagai list langsung), makaa kita butuh joinkan dia semua (listnya) menjadiii satu stringg untuk diprintkan jadi satu stringg yang ga pake kotak kotakk begituu, oke?? gaskan
         # sebaliknya adalah kalo dari string ke list kita harus potong potong (atau kita split split), pake apa? pakee .split()
         #jangan cuma print doang, kembaliin juga namanya
+    
+    # Di dalam class Kucing (kucing.py)
+
         
-    def ubah_data_salah_satu_kucing(self): # jadi tiap satu satu produk kucing dari blueprint ini bisa mengubah datanya lewat/dengna mempunyai fungsi ubah data ini
+    '''def ubah_data_salah_satu_kucing(self): # jadi tiap satu satu produk kucing dari blueprint ini bisa mengubah datanya lewat/dengna mempunyai fungsi ubah data ini
         
         # kalo pake class gini jadinya ga perlu for-loop dah buat nyocokin namanya, kalo namanya sama baru execute perintahnya, itu kelamaan sih
         print("1. nama")
         print("2. hobi")
         print("3. sifat")
-        print("4. spot nongkron")
+        print("4. spot nongkrong")
         ngetik_integer = False
         while ngetik_integer == False:
             nomor_pilihan_user = int(input("mau ubah data yang mana? (ketik nomornya saja) "))
@@ -70,7 +79,7 @@ class Kucing: # ini blueprint pembuatan produknya
                     ngetik_integer = True
                 # ini case kalo unhandled ya
                 case _: # ini itu udah kaya if not integer atau if not one of the case case-nya gitu
-                    print("woyy pilihanmu ga adaa")
+                    print("woyy pilihanmu ga adaa")'''
                     
     # data kucing to dictionary
     #ini buat masing masing kucingnya gitu buat nanti dipanggil secara berulang di fungsi lain. anjay
