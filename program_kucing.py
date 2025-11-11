@@ -3,7 +3,7 @@
 
 from kucing import Kucing
 from manajer_data_kucing import save_data, ambil_data
-import api_request
+import api_manager
 
 # ini itu bisa banget buat di oop-kan ga sih
 # pgn tak kembangin sampe oop dan pgn tak kembangin sampee aku panggil API anjing dan kucing, untuk kucing kucingya buk Sai, terus nanti aku pgn tampilin fotonya gitu terus aku mau bikin kaya mini game vs vs an yang mana misal yaa kaya kartu lah, kartu anjing ini dengan kartu kucing ini satu tim misal ,dan 2 vs 2, dan masing masing kartu nyimpen biodatanya sendiri dan kaya semacam powernya gitu lah, ya gitu, kalo ga nanti untuk menang atau ga-nya dirandom aja dah 
@@ -250,8 +250,32 @@ while user_choice != 5:
             save_data(daftar_kucingnya_buk_sai)
 
         case 6:
-            gambar_random_kucing = learn_api_request.tampilin_gambar_kucing_acak()
-            print(gambar_random_kucing)
+            print("Mau foto kucing apa?")
+            print("1. Foto acak aja")
+            print("2. Foto berdasarkan ras (misal Bengal)")
+            print("3. Cek daftar ID ras dulu")
+
+            pilihan_api = input("Pilih (1/2/3): ")
+
+            if pilihan_api == "1":
+                print("Lagi minta foto ke server...")
+                hasil_url = api_manager.tampilkan_foto_kucing_random()
+                print(hasil_url)
+
+            elif pilihan_api == "2":
+                ras_id = input("Masukkan 4 huruf ID ras (misal 'beng' buat Bengal): ")
+                print(f"Lagi nyari foto ras '{ras_id}'...")
+                hasil_url = api_manager.tampilkan_foto_kucing_ras(ras_id)
+                print(hasil_url)
+
+            elif pilihan_api == "3":
+                print("Lagi ngambil daftar ras...")
+                daftar_ras = api_manager.tampilkan_semua_ras
+                print("--- DAFTAR RAS KUCING ---")
+                print(daftar_ras)
+
+            else:
+                print("Pilihan nggak ada.")
         
         case _: # in case none (_)
             print("Pilihan tidak dikenal, coba lagi ya!")
