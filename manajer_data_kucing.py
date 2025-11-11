@@ -7,13 +7,7 @@ def save_data(daftar_kucingnya_buk_sai: list[Kucing]):
     data_kucing_dict: list[dict[str, Any]] = [] # ember buat versi dictionarynya
     
     for each_kucing in daftar_kucingnya_buk_sai:
-        
-        data_kucing_dict.append({
-            "nama": each_kucing.nama,
-            "hobi": each_kucing.hobi,
-            "sifat": each_kucing.sifat,
-            "spot nongkrong": each_kucing.spot_nongkrong
-        })
+        data_kucing_dict.append(each_kucing.simpan_data_kucing_to_dict())
     
     with open("data_kucing_buk_sai.json", "w") as file: # "w" itu maksudnya write, write itu artinya ya dari data masukan kita di python di write ke json
         json.dump(data_kucing_dict, file, indent=4)

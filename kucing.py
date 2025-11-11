@@ -1,4 +1,5 @@
 # OKEE ini nge-oop in yaa
+from typing import Any
 class Kucing: # ini blueprint pembuatan produknya
     
     # ini pabrik pembuatan satu-satu produknya
@@ -17,6 +18,21 @@ class Kucing: # ini blueprint pembuatan produknya
 
     def set_hobi(self, hobi_baru: str):
         self.hobi = hobi_baru
+
+    def set_sifat(self, sifat_baru: list[str]):
+        self.sifat = sifat_baru
+    
+    def set_spot_nongkrong(self, spot_nongkrong_baru: list[str]):
+        self.spot_nongkrong = spot_nongkrong_baru
+
+    def simpan_data_kucing_to_dict(self) -> dict[str, Any]: ## gini ternyata cara ngasih type hint di fungsi, pake ->, bukan ":"
+    # Cuma GUE (si 'self') yang tau daleman gue
+        return {
+            "nama": self.nama,
+            "hobi": self.hobi,
+            "sifat": self.sifat,
+            "spot nongkrong": self.spot_nongkrong # <--- Ini pake spasi, ngikutin JSON lo
+        }
 
     def tampilkan_informasi_kucing(self):
 

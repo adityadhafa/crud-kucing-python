@@ -57,6 +57,7 @@ daftar_kucingnya_buk_sai: list[Kucing] = ambil_data() # langsung jadi list of di
 user_choice = nyambut_user()
 
 while user_choice != 5:
+    os.system('cls' if os.name == 'nt' else 'clear')
     match user_choice:
         case 2:
             print("yok masukkan data kucing (baru): ")
@@ -71,24 +72,92 @@ while user_choice != 5:
                 spot_nongkrong
             )
             
-            daftar_kucingnya_buk_sai.append(data_kucing_yang_dibuat) 
+            daftar_kucingnya_buk_sai.append(data_kucing_yang_dibuat)           
 
             save_data(daftar_kucingnya_buk_sai)
+            
+            ## pake panel aja biar bagus
+            full_text = f'''
+                nama: {data_kucing_yang_dibuat.nama}
+                hobi: {data_kucing_yang_dibuat.hobi}
+                sifat: {",".join(data_kucing_yang_dibuat.sifat)}
+                spot nongkrong: {",".join(data_kucing_yang_dibuat.spot_nongkrong)}
+            '''
+            
+            kotak_panel = Panel(
+                full_text,
+                title="data kucing berhasil disimpan dan ditambahkan!",
+                border_style= "green"
+            )
+            
+            print(kotak_panel)
 
         case 1: # UPDATE
             # kalo mau liat data kucingnya siapa aja pake case read aja berarti kalo gitu yaa
+                    # 1. Bikin objek mejanya
+            tabel_kucing = Table(title="[bold]Daftar Kucing[/bold]")
+
+            # 2. Bikin header kolom-kolomnya
+            tabel_kucing.add_column("Nama Kucing", style="cyan", justify="left")
+            tabel_kucing.add_column("Hobi", style="magenta")
+            tabel_kucing.add_column("Sifat", style="green")
+            tabel_kucing.add_column("Spot Nongkrong", style="green")
+
+            # --- Langkah 3: Isi Datanya ---
+            # (Di project beneran, ini lo lakuin di dalem 'for loop')
+            
+            for each_kucing in daftar_kucingnya_buk_sai:
+                tabel_kucing.add_row(each_kucing.nama, each_kucing.hobi, ", ".join(each_kucing.sifat), ", ".join(each_kucing.spot_nongkrong))
+
+            # --- Langkah Terakhir: Tampilkan Mejanya ---
+            print(tabel_kucing)
+            
             siapa_yang_mau_diubah = str(input("datanya siapa yang mau diubah? "))
             kucing_object = cari_kucing_object_version(siapa_yang_mau_diubah)
-            kucing_object = cari_kucing_object_version(siapa_yang_mau_diubah)
-            if kucing_object != None:
-                print("Mau ubah apa? 1. Nama, 2. Hobi") # <-- Lo yang nanya
-                pilihan_ubah = input("Pilih: ")
-                if pilihan_ubah == "1":
-                    nama_baru = input("Nama barunya apa? ") # <-- Lo yang nanya
-                    kucing_object.set_nama(nama_baru) # <-- Suruh si object buat diem2 ganti nama
+            
+            pilihan_update = questionary.select("Pilih mau update apa: ", choices=[
+                "1. nama",
+                "2. Hobi",
+                "3. Sifat",
+                "4. Hobi"
+            ]).ask()
+            angka = int(pilihan_update[0])
+
+            if kucing_object:
+                if angka == 1:
+                    nama_baru = input("masukkan nama baru: ")
+                    kucing_object.set_nama(nama_baru= nama_baru)
+                elif angka == 2:
+                    hobi_baru = input("masukkan hobi baru: ")
+                    kucing_object.set_hobi(hobi_baru= hobi_baru)
+                elif angka == 3:
+                    sifat_baru = input("masukkan sifat-sifat baru: ").split(", ")
+                    kucing_object.set_sifat(sifat_baru= sifat_baru)
                 else:
-                    hobi_baru = input("Hobi barunya apa? ")
-                    kucing_object.set_hobi(hobi_baru)
+                    spot_nongkrong_baru = input("masukkan spot-spot nongkrong: ").split(", ")
+                    kucing_object.set_spot_nongkrong(spot_nongkrong_baru= spot_nongkrong_baru)
+                
+                ## pake panel aja biar bagus
+                
+                full_text = f'''
+                    nama: {kucing_object.nama}
+                    hobi: {kucing_object.hobi}
+                    sifat: {",".join(kucing_object.sifat)}
+                    spot nongkrong: {",".join(kucing_object.spot_nongkrong)}
+                '''
+                
+                kotak_panel = Panel(
+                    full_text,
+                    title="data berhasil diubah!",
+                    border_style= "green"
+                )
+                
+                print(kotak_panel)
+                
+            else:
+                print("kau salah ketik nama woy")
+            
+            save_data(daftar_kucingnya_buk_sai)
             
         case 4: # NAMPILKAN DATA 
             status = False
@@ -137,14 +206,15 @@ while user_choice != 5:
 
                         # 2. Bikin header kolom-kolomnya
                         tabel_kucing.add_column("Nama Kucing", style="cyan", justify="left")
-                        tabel_kucing.add_column("Hobi", style="magenta", justify="right")
+                        tabel_kucing.add_column("Hobi", style="magenta")
                         tabel_kucing.add_column("Sifat", style="green")
+                        tabel_kucing.add_column("Spot Nongkrong", style="green")
 
                         # --- Langkah 3: Isi Datanya ---
                         # (Di project beneran, ini lo lakuin di dalem 'for loop')
                         
                         for each_kucing in daftar_kucingnya_buk_sai:
-                            tabel_kucing.add_row(each_kucing.nama, each_kucing.hobi, ", ".join(each_kucing.sifat))
+                            tabel_kucing.add_row(each_kucing.nama, each_kucing.hobi, ", ".join(each_kucing.sifat), ", ".join(each_kucing.spot_nongkrong))
 
                         # --- Langkah Terakhir: Tampilkan Mejanya ---
                         print(tabel_kucing)
@@ -154,10 +224,29 @@ while user_choice != 5:
                 
         case 3: # DELETE
             # bagian delete
+            
+            # 1. Bikin objek mejanya
+            tabel_kucing = Table(title="[bold]Daftar Kucing[/bold]")
+
+            # 2. Bikin header kolom-kolomnya
+            tabel_kucing.add_column("Nama Kucing", style="cyan", justify="left")
+            tabel_kucing.add_column("Hobi", style="magenta")
+            tabel_kucing.add_column("Sifat", style="green")
+            tabel_kucing.add_column("Spot Nongkrong", style="green")
+
+            # --- Langkah 3: Isi Datanya ---
+            # (Di project beneran, ini lo lakuin di dalem 'for loop')
+            
+            for each_kucing in daftar_kucingnya_buk_sai:
+                tabel_kucing.add_row(each_kucing.nama, each_kucing.hobi, ", ".join(each_kucing.sifat), ", ".join(each_kucing.spot_nongkrong))
+
+            # --- Langkah Terakhir: Tampilkan Mejanya ---
+            print(tabel_kucing)
+            
             nama_mau_dihapus = input("mau ngehapus datanya siapa? (ketik namanya) ")
             data_kucing = cari_kucing_object_version(nama_mau_dihapus)
 
-            if data_kucing != None:
+            if data_kucing:
                 daftar_kucingnya_buk_sai.remove(data_kucing) # remove itu fungsi bawaan list yang langsung ngeremove satu data di satu index list lgsg
 
             else:
@@ -186,7 +275,7 @@ while user_choice != 5:
 
             elif pilihan_api == "3":
                 print("Lagi ngambil daftar ras...")
-                daftar_ras = api_manager.tampilkan_semua_ras
+                daftar_ras = api_manager.tampilkan_semua_ras()
                 print("--- DAFTAR RAS KUCING ---")
                 print(daftar_ras)
 
@@ -196,4 +285,5 @@ while user_choice != 5:
         case _: # in case none (_)
             print("Pilihan tidak dikenal, coba lagi ya!")
 
+    input("Tekan Enter untuk lanjut...")
     user_choice = nyambut_user()

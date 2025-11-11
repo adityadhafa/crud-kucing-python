@@ -1,6 +1,6 @@
 [
     {
-        "nama": "ameng",
+        "nama": "aming",
         "hobi": "mengeong",
         "sifat": [
             "kecil",
@@ -20,6 +20,16 @@
         "spot nongkrong": [
             "di kantin",
             "di tong sampha"
+        ]
+    },
+    {
+        "nama": "cemong",
+        "hobi": "ga tau",
+        "sifat": [
+            "kecik"
+        ],
+        "spot nongkrong": [
+            "di kantin"
         ]
     }
 ]
