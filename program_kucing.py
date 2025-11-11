@@ -116,10 +116,10 @@ while user_choice != 5:
             kucing_object = cari_kucing_object_version(siapa_yang_mau_diubah)
             
             pilihan_update = questionary.select("Pilih mau update apa: ", choices=[
-                "1. nama",
+                "1. Nama",
                 "2. Hobi",
                 "3. Sifat",
-                "4. Hobi"
+                "4. Spot Nongkrong"
             ]).ask()
             angka = int(pilihan_update[0])
 

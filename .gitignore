@@ -1,0 +1,6 @@
+# File 'brankas' rahasia
+.env
+
+# Folder cache Python
+__pycache__/
+*.pyc

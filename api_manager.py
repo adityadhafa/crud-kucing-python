@@ -1,12 +1,16 @@
 import requests
 from typing import Any
+from dotenv import load_dotenv
+import os
+
+load_dotenv() # Ini bakal 'makan' isi file .env lo
 
 ## jadiin variabel global dan jadiin konstanta (gede semua)
 URL_DASAR = "https://api.thecatapi.com/v1"
 LOKET_GAMBAR = "/images/search" # <-- beda sama loket breeds
 LOKET_RAS = "/breeds"
-ID_CARD = {
-    "x-api-key": "live_wQ6pRMkN6Jmw172E9eHDcCxocqFFhPjSzIJglUKfrlIBvYj8CTFGQdm8p2L3gInH"
+ID_CARD: dict[str, Any] = {
+    "x-api-key": os.getenv("CAT_API_KEY")
 }
 
 def tampilkan_foto_kucing_random():
